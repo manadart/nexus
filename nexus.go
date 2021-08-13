@@ -7,4 +7,7 @@ type Nexus struct {
 
 	// Devs are the link-layer devices attached to this entity.
 	Devs []Device
+
+	// Endpoints are the service endpoints being offered by this entity.
+	Endpoints []Endpoint
 }
