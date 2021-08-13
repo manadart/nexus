@@ -15,4 +15,7 @@ type Device struct {
 	// NetNSID identifies the network namespace for this device.
 	// See https://en.wikipedia.org/wiki/Linux_namespaces#Network_(net).
 	NetNSID string
+
+	// Addresses are the IP addresses attached to this device.
+	Addresses []Address
 }
