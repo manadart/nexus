@@ -1,14 +1,16 @@
 package nexus
 
-import "net"
+import (
+	"net"
+)
 
 // Endpoint describes a service connection endpoint, I.e. a socket.
 type Endpoint struct {
 	// UUID uniquely identifies this Endpoint.
 	UUID string
 
-	// NexusUUID identifies the Nexus that is offering this Endpoint.
-	NexusUUID string
+	// Nexus is a reference to the Nexus that offers this endpoint.
+	Nexus *Nexus
 
 	// Port is the network port to be listened to by the service.
 	Port int
