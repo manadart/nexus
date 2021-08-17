@@ -20,8 +20,8 @@ type Address struct {
 	IPNet *net.IPNet
 }
 
-// WithUUID returns a function that sets the input UUID on an Address.
-func WithUUID(uuid string) func(*Address) {
+// WithAddressUUID returns a function that sets the input UUID on an Address.
+func WithAddressUUID(uuid string) func(*Address) {
 	return func(a *Address) {
 		a.UUID = uuid
 	}
@@ -39,9 +39,9 @@ func OnDevice(dev *Device) func(*Address) {
 // or an error if an invalid address is supplied.
 func NewAddress(addr string, options ...func(*Address)) (*Address, error) {
 	var (
-		ip net.IP
+		ip    net.IP
 		ipNet *net.IPNet
-		err error
+		err   error
 	)
 
 	if strings.Contains(addr, "/") {
@@ -53,8 +53,8 @@ func NewAddress(addr string, options ...func(*Address)) (*Address, error) {
 	}
 
 	a := &Address{
-		IP:     ip,
-		IPNet:  ipNet,
+		IP:    ip,
+		IPNet: ipNet,
 	}
 
 	for _, opt := range options {
