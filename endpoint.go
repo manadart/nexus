@@ -30,6 +30,12 @@ func WithEndpointUUID(uuid string) func(*Endpoint) {
 	}
 }
 
+func WithEndpointIP(ip net.IP) func(*Endpoint) {
+	return func(e *Endpoint) {
+		e.IP = ip
+	}
+}
+
 // OnNexus returns a function that sets the
 // input Nexus reference on an Endpoint.
 func OnNexus(nex *Nexus) func(*Endpoint) {
