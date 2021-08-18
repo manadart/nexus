@@ -1,6 +1,7 @@
 package nexus
 
 import (
+	"fmt"
 	"net"
 )
 
@@ -20,4 +21,36 @@ type Endpoint struct {
 	// wildcard address, "0.0.0.0" or "::", I.e. a service listening on all
 	// addresses.
 	IP net.IP
+}
+
+// WithEndpointUUID returns a function that sets the input UUID on an Endpoint.
+func WithEndpointUUID(uuid string) func(*Endpoint) {
+	return func(e *Endpoint) {
+		e.UUID = uuid
+	}
+}
+
+// OnNexus returns a function that sets the
+// input Nexus reference on an Endpoint.
+func OnNexus(nex *Nexus) func(*Endpoint) {
+	return func(e *Endpoint) {
+		e.Nexus = nex
+	}
+}
+
+// NewEndpoint returns a new Endpoint based on the input arguments.
+func NewEndpoint(port int, options ...func(endpoint *Endpoint)) (*Endpoint, error) {
+	if port < 0 || port > 65535 {
+		return nil, fmt.Errorf("port %d is outside the allowable range 0-65535", port)
+	}
+
+	ep := &Endpoint{
+		Port: port,
+	}
+
+	for _, opt := range options {
+		opt(ep)
+	}
+
+	return ep, nil
 }

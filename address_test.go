@@ -9,7 +9,7 @@ func TestNewAddress(t *testing.T) {
 	ip := "192.168.0.5"
 	addr, err := NewAddress(ip)
 	if err != nil {
-		t.Error(err)
+		t.Fatal(err)
 	}
 	if addr.IP == nil || addr.IP.String() != ip {
 		t.Errorf("expected IP %s, got %s", ip, addr.IP)
@@ -19,7 +19,7 @@ func TestNewAddress(t *testing.T) {
 	ipSub := "192.168.0.5/24"
 	addr, err = NewAddress(ipSub)
 	if err != nil {
-		t.Error(err)
+		t.Fatal(err)
 	}
 	if addr.IP == nil || addr.IP.String() != ip {
 		t.Errorf("expected IP %s, got %s", ip, addr.IP)
@@ -32,7 +32,7 @@ func TestNewAddress(t *testing.T) {
 	id := "123-456-789"
 	addr, err = NewAddress("", WithAddressUUID(id), OnDevice(&Device{}))
 	if err != nil {
-		t.Error(err)
+		t.Fatal(err)
 	}
 	if addr.UUID != id {
 		t.Errorf("expected UUID %s, got %s", id, addr.UUID)
