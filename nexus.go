@@ -50,3 +50,15 @@ func (n *Nexus) AddEndpoint(ep *Endpoint) error {
 	n.Endpoints = append(n.Endpoints, ep)
 	return nil
 }
+
+// EndpointForPort returns the Nexus Endpoint corresponding
+// to the input port if it exists, or nil otherwise.
+// TODO: Add tests.
+func (n *Nexus) EndpointForPort(port int) *Endpoint {
+	for _, ep := range n.Endpoints {
+		if ep.Port == port {
+			return ep
+		}
+	}
+	return nil
+}
